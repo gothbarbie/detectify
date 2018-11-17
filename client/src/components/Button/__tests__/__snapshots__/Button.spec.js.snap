@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components/Button renders default (blue) 1`] = `
+<Styled(styled.button)
+  onClick={[MockFunction]}
+>
+  Text
+</Styled(styled.button)>
+`;
+
+exports[`Components/Button renders red 1`] = `
+<Styled(styled.button)
+  onClick={[MockFunction]}
+>
+  Text
+</Styled(styled.button)>
+`;
