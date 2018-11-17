@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components/DeleteModal renders 1`] = `
+<DeleteModal
+  deleteNoteAndHideModalThunk={[Function]}
+  hideModal={[Function]}
+  modal={
+    Object {
+      "deleteNoteId": "n01",
+      "show": true,
+    }
+  }
+  notes={
+    Object {
+      "n01": Object {
+        "category": "",
+        "content": "",
+        "description": "",
+        "timestamp": "",
+        "title": "Note Title",
+      },
+    }
+  }
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+/>
+`;
