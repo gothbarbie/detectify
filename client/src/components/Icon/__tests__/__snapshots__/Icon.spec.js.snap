@@ -6,7 +6,12 @@ exports[`Components/Icon renders 1`] = `
   className=""
   fixedWidth={false}
   flip={null}
-  icon={null}
+  icon={
+    Array [
+      "fas",
+      "times",
+    ]
+  }
   inverse={false}
   listItem={false}
   mask={null}
