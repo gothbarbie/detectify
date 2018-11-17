@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
+import moment from 'moment'
+
 import Icon from '../../Icon'
 
 const NoteHeaderStyle = styled.header`
@@ -24,7 +26,7 @@ const NoteTitle = styled.h2`
 const NoteTime = styled.div`
   font-size: 1.1rem;
   color: #222;
-  width: 6rem;
+  width: 10rem;
 `
 
 const NoteDescription = styled.div`
@@ -67,7 +69,7 @@ const NoteHeader = ({ note, toggle, open }) => (
       <NoteTitle>{note.title}</NoteTitle>
       {!open && (
         <Row>
-          <NoteTime>{note.datestamp}</NoteTime>
+          <NoteTime>{moment(note.timestamp).fromNow()}</NoteTime>
           <NoteDescription>{note.description}</NoteDescription>
         </Row>
       )}
@@ -88,7 +90,7 @@ NoteHeader.propTypes = {
   note: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    datestamp: PropTypes.string.isRequired,
+    timestamp: PropTypes.instanceOf(Date).isRequired,
     description: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
