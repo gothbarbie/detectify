@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders 1`] = `
+<styled.header
+  open={false}
+>
+  <styled.div>
+    <styled.h2>
+      Title
+    </styled.h2>
+    <styled.div>
+      <styled.div>
+        2018-01-01
+      </styled.div>
+      <styled.div>
+        Description
+      </styled.div>
+    </styled.div>
+    <styled.div>
+      News
+    </styled.div>
+  </styled.div>
+  <styled.button
+    onClick={[MockFunction]}
+  >
+    <Icon
+      icon={
+        Array [
+          "fas",
+          "chevron-down",
+        ]
+      }
+    />
+  </styled.button>
+</styled.header>
+`;
