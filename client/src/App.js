@@ -12,7 +12,46 @@ class App extends Component {
         <Normalizer />
         <NewNoteButton />
         <SearchField />
-        <NoteItem />
+        <NoteItem
+          note={{
+            id: 'n01',
+            title: 'Title',
+            description: 'Description',
+            category: 'News',
+            content: 'Content',
+            datestamp: '2018-01-01',
+          }}
+        />
+        <NoteItem
+          note={{
+            id: 'n01',
+            title: 'Title',
+            description: 'Description',
+            category: 'News',
+            content: 'Content',
+            datestamp: '2018-01-01',
+          }}
+        />
+        <NoteItem
+          note={{
+            id: 'n01',
+            title: 'Title',
+            description: 'Description',
+            category: 'News',
+            content: 'Content',
+            datestamp: '2018-01-01',
+          }}
+        />
+        <NoteItem
+          note={{
+            id: 'n01',
+            title: 'Title',
+            description: 'Description',
+            category: 'News',
+            content: 'Content',
+            datestamp: '2018-01-01',
+          }}
+        />
       </div>
     )
   }
