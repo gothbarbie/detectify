@@ -7,9 +7,16 @@ import Icon from '../Icon'
 const Delete = styled.button`
   color: #ba3333;
   font-size: 1.3rem;
+  font-weight: 700;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
 
   span {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
   }
 `
 
