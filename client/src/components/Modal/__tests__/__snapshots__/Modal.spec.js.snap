@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Components/Modal renders 1`] = `
-<div>
-  <div>
-    Content
-  </div>
-</div>
+<styled.div>
+  <styled.section>
+    <div>
+      Content
+    </div>
+  </styled.section>
+</styled.div>
 `;
