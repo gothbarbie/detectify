@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import moment from 'moment'
+import { connect } from 'react-redux'
+
+import { showModal } from '../../actions/modalActions'
+import { updateNoteThunk } from '../../actions/notesActions'
 
 import Icon from '../Icon'
+import DeleteButton from '../DeleteButton'
 import NoteHeader from './NoteHeader'
 
 const Article = styled.article`
@@ -14,7 +20,7 @@ const Main = styled.main`
   padding: 1rem;
 `
 
-const Datestamp = styled.div`
+const Timestamp = styled.div`
   font-size: 1.1rem;
   color: #222;
   font-weight: 400;
@@ -35,15 +41,30 @@ const Content = styled.textarea`
   background: transparent;
 `
 
-export default class NoteItem extends Component {
+class NoteItem extends Component {
   state = {
     open: false,
+    content: '',
+    category: '',
   }
 
   toggle = () => {
     this.setState(prevState => ({
       open: !prevState.open,
     }))
+  }
+
+  onChange = event => {
+    this.setState({ content: event.target.value })
+  }
+
+  onBlur = () => {
+    const { note, updateNoteThunk } = this.props
+    updateNoteThunk({ id: note.id, content: this.state.content })
+  }
+
+  onDelete = () => {
+    this.props.showModal()
   }
 
   render() {
@@ -55,11 +76,16 @@ export default class NoteItem extends Component {
         <NoteHeader note={note} toggle={this.toggle} open={open} />
         {open && (
           <Main>
-            <Datestamp>{note.datestamp}</Datestamp>
+            <Timestamp>{moment(note.timestamp).fromNow()}</Timestamp>
             <Category>
               {note.category} <Icon icon={['fas', 'pencil-alt']} />
             </Category>
-            <Content>{note.content}</Content>
+            <Content
+              defaultValue={note.content}
+              onChange={this.onChange}
+              onBlur={this.onBlur}
+            />
+            <DeleteButton onClick={this.onDelete} />
           </Main>
         )}
       </Article>
@@ -71,9 +97,20 @@ NoteItem.propTypes = {
   note: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    datestamp: PropTypes.string.isRequired,
+    timestamp: PropTypes.instanceOf(Date).isRequired,
     description: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
   }).isRequired,
+  updateNoteThunk: PropTypes.func.isRequired,
 }
+
+const mapDispatchToProps = {
+  showModal,
+  updateNoteThunk,
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NoteItem)
