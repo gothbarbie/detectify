@@ -20,14 +20,14 @@ const Delete = styled.button`
   }
 `
 
-const DeleteButton = ({ onClick }) => (
+const DeleteNoteButton = ({ onClick }) => (
   <Delete onClick={onClick}>
     <span>Delete Note</span> <Icon icon={['fas', 'times']} />
   </Delete>
 )
 
-DeleteButton.propTypes = {
+DeleteNoteButton.propTypes = {
   onClick: PropTypes.func.isRequired,
 }
 
-export default DeleteButton
+export default DeleteNoteButton

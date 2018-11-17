@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders 1`] = `
+exports[`Components/DeleteNoteButton renders 1`] = `
 <styled.button
   onClick={[MockFunction]}
 >
