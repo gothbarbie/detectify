@@ -10,7 +10,7 @@ exports[`renders 1`] = `
     </styled.h2>
     <styled.div>
       <styled.div>
-        2018-01-01
+        a few seconds ago
       </styled.div>
       <styled.div>
         Description
