@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders 1`] = `
+<FontAwesomeIcon
+  border={false}
+  className=""
+  fixedWidth={false}
+  flip={null}
+  icon={null}
+  inverse={false}
+  listItem={false}
+  mask={null}
+  pull={null}
+  pulse={false}
+  rotation={null}
+  size={null}
+  spin={false}
+  symbol={false}
+  title=""
+  transform={null}
+/>
+`;
