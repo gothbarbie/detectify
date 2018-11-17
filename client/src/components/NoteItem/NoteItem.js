@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import moment from 'moment'
 import { connect } from 'react-redux'
 
-import { showModal } from '../../actions/modalActions'
+import { showModalAndSetDeleteNoteIdThunk } from '../../actions/modalActions'
 import { updateNoteThunk } from '../../actions/notesActions'
 
 import Icon from '../Icon'
@@ -63,12 +63,8 @@ class NoteItem extends Component {
     updateNoteThunk({ id: note.id, content: this.state.content })
   }
 
-  onDelete = () => {
-    this.props.showModal()
-  }
-
   render() {
-    const { note } = this.props
+    const { note, showModalAndSetDeleteNoteIdThunk } = this.props
     const { open } = this.state
 
     return (
@@ -85,7 +81,11 @@ class NoteItem extends Component {
               onChange={this.onChange}
               onBlur={this.onBlur}
             />
-            <DeleteButton onClick={this.onDelete} />
+            <DeleteButton
+              onClick={() =>
+                showModalAndSetDeleteNoteIdThunk({ deleteNoteId: note.id })
+              }
+            />
           </Main>
         )}
       </Article>
@@ -103,10 +103,11 @@ NoteItem.propTypes = {
     content: PropTypes.string.isRequired,
   }).isRequired,
   updateNoteThunk: PropTypes.func.isRequired,
+  showModalAndSetDeleteNoteIdThunk: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = {
-  showModal,
+  showModalAndSetDeleteNoteIdThunk,
   updateNoteThunk,
 }
 
