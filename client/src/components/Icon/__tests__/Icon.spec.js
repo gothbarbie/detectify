@@ -2,7 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import Icon from '../Icon'
-describe('', () => {
+
+describe('Components/Icon', () => {
   it('renders', () => {
     const wrapper = shallow(<Icon />)
 
