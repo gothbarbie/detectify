@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import Icon from '../Icon'
@@ -20,13 +21,15 @@ const Button = styled.button`
   }
 `
 
-export default class NewNoteButton extends Component {
-  render() {
-    return (
-      <Button>
-        <span>New Note </span>
-        <Icon icon={['fas', 'edit']} />
-      </Button>
-    )
-  }
+const NewNoteButton = ({ onClick }) => (
+  <Button onClick={onClick}>
+    <span>New Note </span>
+    <Icon icon={['fas', 'edit']} />
+  </Button>
+)
+
+NewNoteButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
 }
+
+export default NewNoteButton
