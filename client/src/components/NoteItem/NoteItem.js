@@ -1,77 +1,79 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import Icon from '../Icon'
+import NoteHeader from './NoteHeader'
 
-const NoteHeader = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.2rem 1rem;
+const Article = styled.article`
+  border-top: 1px solid #999999;
 `
 
-const NoteTitle = styled.h2`
-  font-size: 1.3rem;
-  color: #222;
-  margin: 0;
+const Main = styled.main`
+  background-color: #f4f9ff;
+  padding: 1rem;
 `
 
-const NoteTime = styled.div`
+const Datestamp = styled.div`
   font-size: 1.1rem;
   color: #222;
-  width: 6rem;
+  font-weight: 400;
 `
 
-const NoteDescription = styled.div`
+const Category = styled.div`
+  font-size: 1.3rem;
+  color: #6b85a4;
+  font-weight: 700;
+`
+
+const Content = styled.textarea`
+  padding: 1rem 0;
   font-size: 1.2rem;
-  font-weight: 500;
   color: #444;
-`
-
-const NoteCategory = styled.div`
-  font-weight: 500;
-  font-size: 1.2rem;
-  colors: #444;
-`
-
-const Col = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-const Row = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-`
-
-const Button = styled.button`
-  color: #666;
   border: none;
-  display: flex;
-  align-items: center;
+  width: 100%;
+  background: transparent;
 `
 
 export default class NoteItem extends Component {
+  state = {
+    open: false,
+  }
+
+  toggle = () => {
+    this.setState(prevState => ({
+      open: !prevState.open,
+    }))
+  }
+
   render() {
+    const { note } = this.props
+    const { open } = this.state
+
     return (
-      <article>
-        <NoteHeader>
-          <Col>
-            <NoteTitle>Example of an Title</NoteTitle>
-            <Row>
-              <NoteTime>8:01</NoteTime>
-              <NoteDescription>Shorter text description...</NoteDescription>
-            </Row>
-            <NoteCategory>Category</NoteCategory>
-          </Col>
-          <Button>
-            <Icon icon={['fas', 'chevron-down']} />
-          </Button>
-        </NoteHeader>
-        <main>Actual content</main>
-      </article>
+      <Article>
+        <NoteHeader note={note} toggle={this.toggle} open={open} />
+        {open && (
+          <Main>
+            <Datestamp>{note.datestamp}</Datestamp>
+            <Category>
+              {note.category} <Icon icon={['fas', 'pencil-alt']} />
+            </Category>
+            <Content>{note.content}</Content>
+          </Main>
+        )}
+      </Article>
     )
   }
+}
+
+NoteItem.propTypes = {
+  note: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    datestamp: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+  }).isRequired,
 }
