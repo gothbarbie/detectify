@@ -6,12 +6,13 @@ import {
   faChevronDown,
   faChevronUp,
   faEdit,
+  faPencilAlt,
   faSearch,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons'
 
 import App from './App'
 
-library.add(faChevronDown, faChevronUp, faEdit, faSearch, faTimes)
+library.add(faChevronDown, faChevronUp, faEdit, faPencilAlt, faSearch, faTimes)
 
 ReactDOM.render(<App />, document.getElementById('root'))
