@@ -80,14 +80,17 @@ const NoteHeader = ({
   <NoteHeaderStyle open={open}>
     <Col>
       <NoteTitle>
-        {editTitle ? (
-          <EditText
-            name="title"
-            value={title}
-            onChange={onChange}
-            onBlur={onBlur}
-          />
-        ) : (
+        {open &&
+          editTitle && (
+            <EditText
+              name="title"
+              value={title}
+              onChange={onChange}
+              onBlur={onBlur}
+            />
+          )}
+        {!open && title}
+        {open && (
           <span>
             {title}
             <EditButton onClick={setEditTitle} />
@@ -97,7 +100,10 @@ const NoteHeader = ({
       {!open && (
         <Row>
           <NoteTime>{moment(timestamp).fromNow()}</NoteTime>
-          <NoteDescription>{description}</NoteDescription>
+          <NoteDescription>
+            {description}
+            {'...'}
+          </NoteDescription>
         </Row>
       )}
       {!open && <NoteCategory>{category}</NoteCategory>}
