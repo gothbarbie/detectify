@@ -2,11 +2,12 @@ import { ADD_NOTE, UPDATE_NOTE, DELETE_NOTE } from '../actions/notesActions'
 
 const initialState = {}
 
+const date = new Date()
+
 const defaultNote = () => ({
-  timestamp: new Date(),
+  timestamp: date.toISOString(),
   title: 'New Note',
   category: 'Category',
-  description: '',
   content: '',
 })
 
@@ -16,7 +17,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         [action.payload.id]: {
-          ...(action.payload.note || defaultNote()),
+          ...action.payload.note,
         },
       }
 
