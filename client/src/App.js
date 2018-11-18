@@ -31,11 +31,15 @@ class App extends Component {
   renderNotes() {
     const { notes } = this.props
 
-    return Object.entries(notes)
-      .reverse()
-      .map(([id, note]) => {
-        return <NoteItem key={id} note={{ id, ...note }} />
-      })
+    const entries = Object.entries(notes)
+
+    if (!entries.length) {
+      return <div>No notes added yet</div>
+    }
+
+    return entries.reverse().map(([id, note]) => {
+      return <NoteItem key={id} note={{ id, ...note }} />
+    })
   }
 
   render() {
