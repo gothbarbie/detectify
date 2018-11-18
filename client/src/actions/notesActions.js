@@ -29,24 +29,31 @@ export const addNoteThunk = () => dispatch => {
 }
 
 export const updateNoteThunk = ({ id, note }) => dispatch => {
-  // 1. Update API
-  const response = API.post('/note', { id, note })
-  console.log(response)
-  // 2. Update note
-  dispatch(updateNote({ id, note }))
+  try {
+    // 1. Update API
+    const response = API.post('/note', { id, data: note })
+
+    if (response.status === 200) {
+      // 2. Update note
+      dispatch(updateNote({ id, note }))
+    }
+  } catch (error) {}
 }
 
 export const deleteNoteAndHideModalThunk = ({ id }) => dispatch => {
-  // 1. Delete in API
-  const response = API.delete(id)
-  console.log('delete', response)
-  // 2. Delete from store
-  dispatch(deleteNote({ id }))
-  dispatch(hideModal())
+  try {
+    // 1. Delete in API
+    const response = API.delete('/note/delete', { id })
+    if (response.status === 200) {
+      // 2. Delete from store
+      dispatch(deleteNote({ id }))
+      dispatch(hideModal())
+    }
+  } catch (error) {}
 }
 
 export const loadSavedNotesThunk = () => dispatch => {
-  const response = API.getAll()
+  const response = API.get('/note/all')
 
   for (const id in response.body) {
     dispatch(addNote({ id, note: response.body[id] }))
