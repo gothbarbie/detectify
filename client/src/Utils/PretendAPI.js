@@ -11,6 +11,7 @@ export default class PretendAPI {
       content: '',
     }
   }
+
   get(id) {
     const item = window.localStorage.getItem(id)
     if (item) {
@@ -20,19 +21,38 @@ export default class PretendAPI {
     }
   }
 
+  getAll() {
+    const notes = {}
+
+    for (const key in window.localStorage) {
+      const item = window.localStorage.getItem(key)
+      try {
+        const note = JSON.parse(item)
+        if (note && typeof note === 'object') {
+          notes[key] = note
+        }
+      } catch (ex) {
+        // We can ignore anything that isn't JSON compatible
+      }
+    }
+    return { status: 200, body: notes }
+    // remove empty items from non-parsable items
+    // return notes.filter(el => el !== null)
+  }
+
   post(url, { id, data } = { id: uuid() }) {
     const note = this._createNote()
 
     switch (url) {
       case '/note':
-        window.localStorage.setItem(id, JSON.stringify(note))
+        window.localStorage.setItem(id, JSON.stringify(data))
         return {
           status: 200,
           body: { id, data },
         }
 
       case '/note/new':
-        window.localStorage.setItem(id, JSON.stringify(data))
+        window.localStorage.setItem(id, JSON.stringify(note))
         return {
           status: 200,
           body: { id, data: note },
