@@ -7,9 +7,10 @@ import { connect } from 'react-redux'
 import { showModalAndSetDeleteNoteIdThunk } from '../../actions/modalActions'
 import { updateNoteThunk } from '../../actions/notesActions'
 
-import Icon from '../Icon'
+import EditButton from '../EditButton'
 import DeleteNoteButton from '../DeleteNoteButton'
 import NoteHeader from './NoteHeader'
+import EditText from '../EditText'
 
 const Article = styled.article`
   border-top: 1px solid #999999;
@@ -44,8 +45,11 @@ const Content = styled.textarea`
 class NoteItem extends Component {
   state = {
     open: false,
-    content: '',
-    category: '',
+    editCategory: false,
+    editTitle: false,
+    title: this.props.note.title,
+    content: this.props.note.content,
+    category: this.props.note.category,
   }
 
   toggle = () => {
@@ -54,30 +58,80 @@ class NoteItem extends Component {
     }))
   }
 
+  setEditCategory = () =>
+    this.setState({
+      editCategory: true,
+    })
+
+  setEditTitle = () => this.setState({ editTitle: true })
+
   onChange = event => {
-    this.setState({ content: event.target.value })
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   onBlur = () => {
     const { note, updateNoteThunk } = this.props
-    updateNoteThunk({ id: note.id, content: this.state.content })
+    const { title, content, category } = this.state
+    const date = new Date()
+    const updatedNote = {
+      title,
+      timestamp: date.toISOString(),
+      category,
+      content,
+    }
+    updateNoteThunk({ id: note.id, note: updatedNote })
+    this.setState({
+      editCategory: false,
+      editTitle: false,
+    })
   }
 
   render() {
     const { note, showModalAndSetDeleteNoteIdThunk } = this.props
-    const { open } = this.state
+    const {
+      editTitle,
+      editCategory,
+      open,
+      title,
+      content,
+      category,
+    } = this.state
 
     return (
       <Article>
-        <NoteHeader note={note} toggle={this.toggle} open={open} />
+        <NoteHeader
+          setEditTitle={this.setEditTitle}
+          editTitle={editTitle}
+          onBlur={this.onBlur}
+          onChange={this.onChange}
+          timestamp={note.timestamp}
+          category={category}
+          descriptions={content.substr(0, 10)}
+          toggle={this.toggle}
+          open={open}
+          title={title}
+        />
         {open && (
           <Main>
             <Timestamp>{moment(note.timestamp).fromNow()}</Timestamp>
             <Category>
-              {note.category} <Icon icon={['fas', 'pencil-alt']} />
+              {editCategory ? (
+                <EditText
+                  value={category}
+                  name="category"
+                  onChange={this.onChange}
+                  onBlur={this.onBlur}
+                />
+              ) : (
+                <span>
+                  {category}
+                  <EditButton onClick={this.setEditCategory} />
+                </span>
+              )}
             </Category>
             <Content
-              defaultValue={note.content}
+              name="content"
+              value={content}
               onChange={this.onChange}
               onBlur={this.onBlur}
             />
@@ -98,7 +152,6 @@ NoteItem.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     timestamp: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
   }).isRequired,
