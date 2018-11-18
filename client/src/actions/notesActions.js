@@ -44,11 +44,10 @@ export const deleteNoteAndHideModalThunk = ({ id }) => dispatch => {
   try {
     // 1. Delete in API
     const response = API.delete('/note/delete', { id })
-    if (response.status === 200) {
-      // 2. Delete from store
-      dispatch(deleteNote({ id }))
-      dispatch(hideModal())
-    }
+
+    // 2. Delete from store
+    dispatch(deleteNote({ id }))
+    dispatch(hideModal())
   } catch (error) {}
 }
 
