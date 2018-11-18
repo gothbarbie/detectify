@@ -63,8 +63,7 @@ DeleteModal.propTypes = {
   hideModal: PropTypes.func.isRequired,
   note: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    timestamp: PropTypes.instanceOf(Date).isRequired,
-    description: PropTypes.string.isRequired,
+    timestamp: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
   }).isRequired,
