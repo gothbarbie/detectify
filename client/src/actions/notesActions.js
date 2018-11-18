@@ -7,17 +7,17 @@ export const DELETE_NOTE = 'DELETE_NOTE'
 
 const API = new PretendAPI()
 
-const addNote = ({ id, note }) => ({
+export const addNote = ({ id, note }) => ({
   type: ADD_NOTE,
   payload: { id, note },
 })
 
-const updateNote = ({ id, note }) => ({
+export const updateNote = ({ id, note }) => ({
   type: UPDATE_NOTE,
   payload: { id, note },
 })
 
-const deleteNote = ({ id }) => ({
+export const deleteNote = ({ id }) => ({
   type: DELETE_NOTE,
   payload: { id },
 })
