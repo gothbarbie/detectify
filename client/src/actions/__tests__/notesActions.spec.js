@@ -141,7 +141,10 @@ describe('Actions/Notes', () => {
       it(`uses API.post('/note/delete') to delete a Note`, async () => {
         const id = 'n01'
 
-        const actions = []
+        const actions = [
+          { payload: { id: 'n01' }, type: 'DELETE_NOTE' },
+          { type: 'HIDE_MODAL' },
+        ]
 
         await store.dispatch(deleteNoteAndHideModalThunk({ id }))
 
@@ -150,7 +153,13 @@ describe('Actions/Notes', () => {
     })
 
     describe('loadSavedNotesThunk', () => {
-      it('', () => {})
+      it('loads all existing notes', async () => {
+        const actions = []
+
+        await store.dispatch(loadSavedNotesThunk())
+
+        expect(store.getActions()).toEqual(actions)
+      })
     })
   })
 })
