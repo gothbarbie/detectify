@@ -16,32 +16,32 @@ describe('Utils/PretendAPI', () => {
 
   afterEach(() => {
     global.Date = RealDate
+    jest.resetAllMocks()
   })
 
   beforeEach(() => {
     API = new PretendAPI()
     id = '4653eade-15ed-419a-b57f-6f169f97a687'
+    mockDate('2017-11-25T12:34:56z')
   })
 
   it('/note - stores data', () => {
     const data = {
-      timestamp: mockDate('2017-11-25T12:34:56z'),
+      timestamp: '2017-11-25T12:34:56z',
       title: 'New Note',
       category: 'Category',
-      description: '',
       content: '',
     }
-    const result = API.post('/note', { id, data })
+    const result = API.post('/note', id, data)
     const expectedResult = {
       body: {
         data: {
           category: 'Category',
           content: '',
-          description: '',
-          timestamp: mockDate('2017-11-25T12:34:56z'),
+          timestamp: '2017-11-25T12:34:56z',
           title: 'New Note',
         },
-        id: '4653eade-15ed-419a-b57f-6f169f97a687',
+        id,
       },
       status: 200,
     }
@@ -49,40 +49,37 @@ describe('Utils/PretendAPI', () => {
   })
 
   it('/note/new - returns new note', () => {
-    const result = API.post('/note/new')
-
-    expect(result).toEqual({
+    const result = API.post('/note/new', id)
+    const expectedResult = {
       body: {
         data: {
           category: 'Category',
           content: '',
-          description: '',
-          timestamp: expect.anything(),
+          timestamp: '2017-11-25T12:34:56.000Z',
           title: 'New Note',
         },
-        id: expect.anything(),
+        id: '4653eade-15ed-419a-b57f-6f169f97a687',
       },
       status: 200,
-    })
+    }
+
+    expect(result).toEqual(expectedResult)
   })
 
-  it('retrieves data', () => {
-    const result = API.get(id)
+  it('/note/all - retrieve all notes', () => {
+    const result = API.get('/note/all')
     const expectedResult = {
-      body: {
-        category: 'Category',
-        content: '',
-        description: '',
-        timestamp: '2017-11-25T12:34:56.000Z',
-        title: 'New Note',
-      },
+      body: {},
       status: 200,
     }
     expect(result).toEqual(expectedResult)
   })
 
-  it('deletes data', () => {
-    const result = API.delete(id)
+  // TODO: Figure out how mocked localstore works
+  // So several steps can be tested after each other
+  xit('deletes data', () => {
+    const newNote = API.post('/note/new', id)
+    const result = API.delete('/note/delete', id)
     const expectedResult = {
       body: '4653eade-15ed-419a-b57f-6f169f97a687',
       status: 200,
