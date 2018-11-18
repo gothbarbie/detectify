@@ -1,6 +1,16 @@
 import uuid from 'uuid/v4'
 
 export default class PretendAPI {
+  _createNote() {
+    const date = new Date()
+    return {
+      timestamp: date.toISOString(),
+      title: 'New Note',
+      category: 'Category',
+      description: '',
+      content: '',
+    }
+  }
   get(id) {
     const item = window.localStorage.getItem(id)
     if (item) {
@@ -10,9 +20,27 @@ export default class PretendAPI {
     }
   }
 
-  post({ id = uuid(), data }) {
-    window.localStorage.setItem(id, JSON.stringify(data))
-    return { status: 200, body: id }
+  post(url, { id, data } = { id: uuid() }) {
+    const note = this._createNote()
+
+    switch (url) {
+      case '/note':
+        window.localStorage.setItem(id, JSON.stringify(note))
+        return {
+          status: 200,
+          body: { id, data },
+        }
+
+      case '/note/new':
+        window.localStorage.setItem(id, JSON.stringify(data))
+        return {
+          status: 200,
+          body: { id, data: note },
+        }
+
+      default:
+        break
+    }
   }
 
   delete(id) {
