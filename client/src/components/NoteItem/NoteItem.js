@@ -97,7 +97,7 @@ NoteItem.propTypes = {
   note: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    timestamp: PropTypes.instanceOf(Date).isRequired,
+    timestamp: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
