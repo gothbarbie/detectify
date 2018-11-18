@@ -43,8 +43,7 @@ export const updateNoteThunk = ({ id, note }) => dispatch => {
 export const deleteNoteAndHideModalThunk = ({ id }) => dispatch => {
   try {
     // 1. Delete in API
-    const response = API.delete('/note/delete', { id })
-
+    const response = API.delete('/note/delete', id)
     // 2. Delete from store
     dispatch(deleteNote({ id }))
     dispatch(hideModal())
