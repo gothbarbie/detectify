@@ -66,11 +66,8 @@ export default class PretendAPI {
 
   delete(url, id) {
     if (url === '/note/delete') {
-      if (this.get(id)) {
-        window.localStorage.removeItem(id)
-        return { status: 200, body: id }
-      }
-      return { status: 404 }
+      window.localStorage.removeItem(id)
+      return { status: 200, body: id }
     }
   }
 }
