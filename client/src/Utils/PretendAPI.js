@@ -7,17 +7,20 @@ export default class PretendAPI {
       timestamp: date.toISOString(),
       title: 'New Note',
       category: 'Category',
-      description: '',
       content: '',
     }
   }
 
-  get(id) {
-    const item = window.localStorage.getItem(id)
-    if (item) {
-      return { status: 200, body: JSON.parse(item) }
-    } else {
-      return { status: 404 }
+  get(url, { id } = { id: '' }) {
+    if (url === '/note') {
+      const item = window.localStorage.getItem(id)
+      if (item) {
+        return { status: 200, body: JSON.parse(item) }
+      } else {
+        return { status: 404 }
+      }
+    } else if (url === '/note/all') {
+      return this.getAll()
     }
   }
 
@@ -36,11 +39,9 @@ export default class PretendAPI {
       }
     }
     return { status: 200, body: notes }
-    // remove empty items from non-parsable items
-    // return notes.filter(el => el !== null)
   }
 
-  post(url, { id, data } = { id: uuid() }) {
+  post(url, id = uuid(), data) {
     const note = this._createNote()
 
     switch (url) {
@@ -63,11 +64,13 @@ export default class PretendAPI {
     }
   }
 
-  delete(id) {
-    if (this.get(id)) {
-      window.localStorage.removeItem(id)
-      return { status: 200, body: id }
+  delete(url, id) {
+    if (url === '/note/delete') {
+      if (this.get(id)) {
+        window.localStorage.removeItem(id)
+        return { status: 200, body: id }
+      }
+      return { status: 404 }
     }
-    return { status: 404 }
   }
 }
