@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 import { addNoteThunk, loadSavedNotesThunk } from './actions/notesActions'
 import { setNotesFilter, clearNotesFilter } from './actions/notesFilterActions'
@@ -12,6 +13,16 @@ import NoteItem from './components/NoteItem'
 import Normalizer from './components/Normalizer'
 import Modal from './components/Modal'
 import DeleteModal from './components/DeleteModal'
+
+const NoNotesYet = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #666;
+  height: 5rem;
+`
 
 class App extends Component {
   constructor(props) {
@@ -34,7 +45,7 @@ class App extends Component {
     const entries = Object.entries(notes)
 
     if (!entries.length) {
-      return <div>No notes added yet</div>
+      return <NoNotesYet>No notes added yet...</NoNotesYet>
     }
 
     return entries.reverse().map(([id, note]) => {
