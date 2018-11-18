@@ -3,22 +3,15 @@
 exports[`Components/DeleteModal renders 1`] = `
 <DeleteModal
   deleteNoteAndHideModalThunk={[Function]}
+  deleteNoteId="n01"
   hideModal={[Function]}
-  modal={
+  note={
     Object {
-      "deleteNoteId": "n01",
-      "show": true,
-    }
-  }
-  notes={
-    Object {
-      "n01": Object {
-        "category": "",
-        "content": "",
-        "description": "",
-        "timestamp": "",
-        "title": "Note Title",
-      },
+      "category": "",
+      "content": "",
+      "description": "",
+      "timestamp": "",
+      "title": "Note Title",
     }
   }
   store={
