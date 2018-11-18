@@ -25,8 +25,7 @@ const deleteNote = ({ id }) => ({
 export const addNoteThunk = () => dispatch => {
   // Request new Note from API
   const response = API.post('/note/new')
-
-  dispatch(addNote({ id: response.body.id, note: response.body.note }))
+  dispatch(addNote({ id: response.body.id, note: response.body.data }))
 }
 
 export const updateNoteThunk = ({ id, note }) => dispatch => {
