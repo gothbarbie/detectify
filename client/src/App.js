@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { addNoteThunk, loadSavedNotesThunk } from './actions/notesActions'
+import { setNotesFilter, clearNotesFilter } from './actions/notesFilterActions'
+import { getFilteredNotes } from './selectors/notesSelectors'
 
 import NewNoteButton from './components/NewNoteButton'
 import SearchField from './components/SearchField'
@@ -22,6 +24,10 @@ class App extends Component {
     // props.addNoteThunk()
   }
 
+  onChange = event => {
+    this.props.setNotesFilter({ filter: event.target.value })
+  }
+
   renderNotes() {
     const { notes } = this.props
 
@@ -33,12 +39,12 @@ class App extends Component {
   }
 
   render() {
-    const { addNoteThunk, modal } = this.props
+    const { addNoteThunk, modal, notesFilter } = this.props
     return (
       <div>
         <Normalizer />
         <NewNoteButton onClick={addNoteThunk} />
-        <SearchField />
+        <SearchField onChange={this.onChange} value={notesFilter} />
         {this.renderNotes()}
         <Modal show={modal.show}>
           <DeleteModal />
@@ -63,16 +69,21 @@ App.propTypes = {
       content: PropTypes.string.isRequired,
     },
   }).isRequired,
+  notesFilter: PropTypes.string.isRequired,
+  setNotesFilter: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = ({ notes, modal }) => ({
-  notes,
-  modal,
+const mapStateToProps = state => ({
+  modal: state.modal,
+  notes: getFilteredNotes(state),
+  notesFilter: state.notesFilter,
 })
 
 const mapDispatchToProps = {
   addNoteThunk,
   loadSavedNotesThunk,
+  setNotesFilter,
+  clearNotesFilter,
 }
 
 export default connect(
