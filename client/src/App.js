@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { addNoteThunk } from './actions/notesActions'
+import { addNoteThunk, loadSavedNotesThunk } from './actions/notesActions'
 
 import NewNoteButton from './components/NewNoteButton'
 import SearchField from './components/SearchField'
@@ -15,10 +15,11 @@ class App extends Component {
   constructor(props) {
     super(props)
 
-    props.addNoteThunk()
-    props.addNoteThunk()
-    props.addNoteThunk()
-    props.addNoteThunk()
+    props.loadSavedNotesThunk()
+    // props.addNoteThunk()
+    // props.addNoteThunk()
+    // props.addNoteThunk()
+    // props.addNoteThunk()
   }
 
   renderNotes() {
@@ -49,6 +50,7 @@ class App extends Component {
 
 App.propTypes = {
   addNoteThunk: PropTypes.func.isRequired,
+  loadSavedNotesThunk: PropTypes.func.isRequired,
   modal: PropTypes.shape({
     show: PropTypes.bool.isRequired,
   }).isRequired,
@@ -70,6 +72,7 @@ const mapStateToProps = ({ notes, modal }) => ({
 
 const mapDispatchToProps = {
   addNoteThunk,
+  loadSavedNotesThunk,
 }
 
 export default connect(
