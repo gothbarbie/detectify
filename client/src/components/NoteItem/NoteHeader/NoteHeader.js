@@ -5,13 +5,15 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 
 import Icon from '../../Icon'
+import EditButton from '../../EditButton'
+import EditText from '../../EditText'
 
 const NoteHeaderStyle = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.2rem 1rem;
-  background-color: #bbc0c5;
+  background-color: #becad6;
   background-color: ${({ open }) => open && '#7F98B7'};
   height: 6.6rem;
   height: ${({ open }) => open && '2.5rem'};
@@ -19,7 +21,7 @@ const NoteHeaderStyle = styled.header`
 
 const NoteTitle = styled.h2`
   font-size: 1.3rem;
-  color: #222;
+  color: #2e3a49;
   margin: 0;
 `
 
@@ -38,7 +40,7 @@ const NoteDescription = styled.div`
 const NoteCategory = styled.div`
   font-weight: 500;
   font-size: 1.2rem;
-  colors: #444;
+  color: #444;
 `
 
 const Col = styled.div`
@@ -63,17 +65,42 @@ const Button = styled.button`
   cursor: pointer;
 `
 
-const NoteHeader = ({ note, toggle, open }) => (
+const NoteHeader = ({
+  category,
+  editTitle,
+  title,
+  timestamp,
+  description,
+  toggle,
+  setEditTitle,
+  open,
+  onChange,
+  onBlur,
+}) => (
   <NoteHeaderStyle open={open}>
     <Col>
-      <NoteTitle>{note.title}</NoteTitle>
+      <NoteTitle>
+        {editTitle ? (
+          <EditText
+            name="title"
+            value={title}
+            onChange={onChange}
+            onBlur={onBlur}
+          />
+        ) : (
+          <span>
+            {title}
+            <EditButton onClick={setEditTitle} />
+          </span>
+        )}
+      </NoteTitle>
       {!open && (
         <Row>
-          <NoteTime>{moment(note.timestamp).fromNow()}</NoteTime>
-          <NoteDescription>{note.description}</NoteDescription>
+          <NoteTime>{moment(timestamp).fromNow()}</NoteTime>
+          <NoteDescription>{description}</NoteDescription>
         </Row>
       )}
-      {!open && <NoteCategory>{note.category}</NoteCategory>}
+      {!open && <NoteCategory>{category}</NoteCategory>}
     </Col>
     <Button onClick={toggle}>
       {open ? (
@@ -87,15 +114,15 @@ const NoteHeader = ({ note, toggle, open }) => (
 
 NoteHeader.propTypes = {
   toggle: PropTypes.func.isRequired,
-  note: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    timestamp: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-  }).isRequired,
+  setEditTitle: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  timestamp: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  editTitle: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
 }
 
 export default NoteHeader
