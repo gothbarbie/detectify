@@ -106,7 +106,7 @@ class NoteItem extends Component {
           onChange={this.onChange}
           timestamp={note.timestamp}
           category={category}
-          descriptions={content.substr(0, 10)}
+          description={content.substr(0, 50)}
           toggle={this.toggle}
           open={open}
           title={title}
