@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const InputField = styled.input`
@@ -12,8 +13,19 @@ const InputField = styled.input`
   font-size: 1.4rem;
 `
 
-export default class SearchField extends Component {
-  render() {
-    return <InputField type="search" name="search" placeholder="Search..." />
-  }
+const SearchField = ({ onChange, value }) => (
+  <InputField
+    type="search"
+    name="search"
+    placeholder="Search..."
+    onChange={onChange}
+    value={value}
+  />
+)
+
+SearchField.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 }
+
+export default SearchField
