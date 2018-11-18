@@ -6,18 +6,15 @@ exports[`Components/NoteItem/NoteHeader renders closed 1`] = `
 >
   <styled.div>
     <styled.h2>
-      <span>
-        Note Title
-        <EditButton
-          onClick={[MockFunction]}
-        />
-      </span>
+      Note Title
     </styled.h2>
     <styled.div>
       <styled.div>
         Invalid date
       </styled.div>
-      <styled.div />
+      <styled.div>
+        ...
+      </styled.div>
     </styled.div>
     <styled.div>
       Note Category
