@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Components/NoteItem renders 1`] = `
+<Connect(NoteItem)
+  note={
+    Object {
+      "category": "Note Category",
+      "content": "Lots of text that fills up the content area.",
+      "id": "n01",
+      "timestamp": "2018-11-18T14:41:23.630Z",
+      "title": "Note Title",
+    }
+  }
+  showModalAndSetDeleteNoteIdThunk={[MockFunction]}
+  updateNoteThunk={[MockFunction]}
+/>
+`;
