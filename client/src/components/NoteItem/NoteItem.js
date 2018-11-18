@@ -8,7 +8,7 @@ import { showModalAndSetDeleteNoteIdThunk } from '../../actions/modalActions'
 import { updateNoteThunk } from '../../actions/notesActions'
 
 import Icon from '../Icon'
-import DeleteButton from '../DeleteButton'
+import DeleteNoteButton from '../DeleteNoteButton'
 import NoteHeader from './NoteHeader'
 
 const Article = styled.article`
@@ -81,7 +81,7 @@ class NoteItem extends Component {
               onChange={this.onChange}
               onBlur={this.onBlur}
             />
-            <DeleteButton
+            <DeleteNoteButton
               onClick={() =>
                 showModalAndSetDeleteNoteIdThunk({ deleteNoteId: note.id })
               }
