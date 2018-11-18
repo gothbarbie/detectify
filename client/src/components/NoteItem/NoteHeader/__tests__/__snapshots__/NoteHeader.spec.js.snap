@@ -1,23 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders 1`] = `
+exports[`Components/NoteItem/NoteHeader renders closed 1`] = `
 <styled.header
   open={false}
 >
   <styled.div>
     <styled.h2>
-      Title
+      <span>
+        Note Title
+        <EditButton
+          onClick={[MockFunction]}
+        />
+      </span>
     </styled.h2>
     <styled.div>
       <styled.div>
-        a few seconds ago
+        Invalid date
       </styled.div>
-      <styled.div>
-        Description
-      </styled.div>
+      <styled.div />
     </styled.div>
     <styled.div>
-      News
+      Note Category
     </styled.div>
   </styled.div>
   <styled.button
@@ -28,6 +31,35 @@ exports[`renders 1`] = `
         Array [
           "fas",
           "chevron-down",
+        ]
+      }
+    />
+  </styled.button>
+</styled.header>
+`;
+
+exports[`Components/NoteItem/NoteHeader renders open 1`] = `
+<styled.header
+  open={true}
+>
+  <styled.div>
+    <styled.h2>
+      <span>
+        Note Title
+        <EditButton
+          onClick={[MockFunction]}
+        />
+      </span>
+    </styled.h2>
+  </styled.div>
+  <styled.button
+    onClick={[MockFunction]}
+  >
+    <Icon
+      icon={
+        Array [
+          "fas",
+          "chevron-up",
         ]
       }
     />
