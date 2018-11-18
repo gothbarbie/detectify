@@ -9,6 +9,7 @@ describe('Components/EditText', () => {
       onBlur: jest.fn(),
       onChange: jest.fn(),
       value: '',
+      name: 'name',
     }
     const wrapper = shallow(<EditText {...props} />)
 

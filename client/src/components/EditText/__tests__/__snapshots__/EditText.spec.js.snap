@@ -2,6 +2,7 @@
 
 exports[`Components/EditText renders 1`] = `
 <styled.input
+  name="name"
   onBlur={[MockFunction]}
   onChange={[MockFunction]}
   value=""
